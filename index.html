@@ -1,188 +1,137 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8" />
-    <title>Document</title>
-    <style>
-        select {
-            width: 200px;
-        }
-        .wrap {
-            float: left;
-            width: 900px;
-            margin: 50px auto;
-        }
-        .wrap span {
-            display: inline-block;
-            width: 64px;
-            height: 64px;
-        }
-        .wrap b {
-            display: inline-block;
-            margin-left: 10px;
-            line-height: 3;
-            vertical-align: top;
-        }
-        .box {
-            width: 150px;
-            float: left;
-            margin: 0 0 50px 100px;
-            overflow: hidden;
-            text-align: center;
-        }
-        .box div {
-            width: 150px;
-            height: 150px;
-        }
-        .ctrl {
-            float: left;
-            width: 260px;
-            margin-top: 100px;
-        }
-        #showNowTime {
-            width: 100%;
-            height: 20px;
-        }
-    </style>
-</head>
-<body>
-    <div class="wrap">
-        <div class="box" data-country="China" data-timediff="0"><span></span><b>中国</b><div></div></div>
-        <div class="box" data-country="American" data-timediff="-12"><span></span><b>美国</b><div></div></div>
-        <div class="box" data-country="Canada" data-timediff="-13"><span></span><b>加拿大</b><div></div></div>
-        <div class="box" data-country="Brazil" data-timediff="-11"><span></span><b>巴西</b><div></div></div>
-        <div class="box" data-country="Argentina" data-timediff="-11"><span></span><b>阿根廷</b><div></div></div>
-        <div class="box" data-country="Germany" data-timediff="-7"><span></span><b>德国</b><div></div></div>
-        <div class="box" data-country="English" data-timediff="-8"><span></span><b>英国</b><div></div></div>
-        <div class="box" data-country="France" data-timediff="-7"><span></span><b>法国</b><div></div></div>
-        <div class="box" data-country="Japan" data-timediff="+1"><span></span><b>日本</b><div></div></div>
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Clock by NewLiuRen</title>
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/github-dark.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="javascripts/respond.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <!--[if lt IE 8]>
+    <link rel="stylesheet" href="stylesheets/ie.css">
+    <![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+  </head>
+  <body>
+      <div id="header">
+        <nav>
+          <li class="fork"><a href="https://github.com/NewLiuRen/clock">View On GitHub</a></li>
+          <li class="downloads"><a href="https://github.com/NewLiuRen/clock/zipball/master">ZIP</a></li>
+          <li class="downloads"><a href="https://github.com/NewLiuRen/clock/tarball/master">TAR</a></li>
+          <li class="title">DOWNLOADS</li>
+        </nav>
+      </div><!-- end header -->
+
+    <div class="wrapper">
+
+      <section>
+        <div id="title">
+          <h1>Clock</h1>
+          <p>电子时钟的jQuery插件</p>
+          <hr>
+          <span class="credits left">Project maintained by <a href="https://github.com/NewLiuRen">NewLiuRen</a></span>
+          <span class="credits right">Hosted on GitHub Pages &mdash; Theme by <a href="https://twitter.com/michigangraham">mattgraham</a></span>
+        </div>
+
+        <h1>
+<a id="clock" class="anchor" href="#clock" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>clock</h1>
+
+<p>电子时钟的jQuery插件</p>
+
+<p>demo:<a href="http://newliuren.github.io/clock/clock.html">http://newliuren.github.io/clock/clock.html</a></p>
+
+<p>使用时需要提供一个外部的容器，在内部盒子中初始化时钟，盒子需设置宽高，
+时钟初始化时会自动计算并使用较小值作为时钟边长，不会冲破容器</p>
+
+<p>例子：</p>
+
+<p>首先提供两个盒子，外部的作为容器，内部的为时钟</p>
+
+<p>&lt;div class="box"&gt;&lt;div id="clock" style="width:300px;height:300px;"&gt;&lt;/div&gt;&lt;/div&gt;</p>
+
+<p>然后就可以初始化时钟了</p>
+
+<p>var clock = $('#clock').initClock();</p>
+
+<h3>
+<a id="initclock配置项默认值" class="anchor" href="#initclock%E9%85%8D%E7%BD%AE%E9%A1%B9%E9%BB%98%E8%AE%A4%E5%80%BC" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>initClock()配置项(默认值)</h3>
+
+<p>//文字大小(可接受符合css的font-size规则的任意值)</p>
+
+<p>numSize : '90%'</p>
+
+<p>//外框颜色(可接受符合css的颜色规则的任意值，如#fff，rgba(0,0,0,0.7),hsla(100,10,10,0.7)下同)</p>
+
+<p>outsideColor : '#ffe168'</p>
+
+<p>//内框颜色</p>
+
+<p>insideColor : 'rgba(253, 213, 58, 0.8)'</p>
+
+<p>//文字颜色</p>
+
+<p>fontColor : '#ffffff'</p>
+
+<p>//小刻度颜色</p>
+
+<p>markSmallColor : '#ffeb9a'</p>
+
+<p>//大刻度颜色</p>
+
+<p>markBigColor : '#fffbe9'</p>
+
+<p>//指针背景颜色</p>
+
+<p>pointerBgColor : '#fffced'</p>
+
+<p>//秒针背景颜色</p>
+
+<p>secPointerBgColor : '#ade383'</p>
+
+<p>//时针背景颜色</p>
+
+<p>hourPointerColor : '#fffced'</p>
+
+<p>//分针背景颜色</p>
+
+<p>minPointerColor : '#fffced'</p>
+
+<p>//秒针背景颜色</p>
+
+<p>secPointerColor : '#ade383'</p>
+
+<p>如:
+var clock = $('#clock').initClock({
+    outsideColor : 'rgba(232, 104, 104, 0.8)',
+    insideColor : 'rgba(252, 58, 58, 0.6)',
+    markSmallColor : '#FF9999',
+    secPointerBgColor : '#E3D984',
+    secPointerColor : '#E1E384'
+});</p>
+
+<h3>
+<a id="方法" class="anchor" href="#%E6%96%B9%E6%B3%95" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>方法：</h3>
+
+<p><strong>1.run()按照当前时间运行时钟</strong>
+clock.run();</p>
+
+<p><strong>2.setTime(msec)设置时钟的时间，msec[number]为要设置时间的毫秒数</strong>
+clock.setTime(msec);</p>
+
+<p><strong>3.getTime([isShow])返回当前时间，参数isShow[boolean]可选，若有参数，则返回hh:mm:ss格式的时间，否则返回时钟当前的毫秒数</strong>
+clock.getTime(true));</p>
+
+<p><strong>4.setColor(name, color)修改当前时钟的样式，只能为initClock()配置项中的值，颜色格式与初始化时的值格式相同</strong>
+clock.Color('outsideColor', '#666');</p>
+      </section>
+
     </div>
-    <div class="ctrl">
-        <h3>世界时间</h3>
-        <select name="country" id="country">
-            <option value="China">中国</option>
-            <option value="American">美国</option>
-            <option value="Canada">加拿大</option>
-            <option value="Brazil">巴西</option>
-            <option value="Argentina">阿根廷</option>
-            <option value="Germany">德国</option>
-            <option value="English">英国</option>
-            <option value="France">法国</option>
-            <option value="Japan">日本</option>
-        </select>
-        <br />
-        <br />
-        <button id="getBtn">获取当前时间</button>
-        <div id="showNowTime"></div>
-        <br />
-        <br />
-        <label>设置时间：
-            <input type="text" placeholder="格式为 hh:mm:ss" id="time" />
-        </label>
-        <br />
-        <br />
-        <button id="setBtn">设置当前时间</button>
-        <br />
-        <br />
-        <button id="restBtn">还原为当前时间</button>
-        <br />
-        <br />
-        <br />
-        <br />
-        <label>设置颜色：
-            <select name="colorName" id="colorName">
-                <option value="outsideColor">外框</option>
-                <option value="insideColor">内框</option>
-                <option value="fontColor">文字</option>
-                <option value="markSmallColor">小刻度</option>
-                <option value="markBigColor">大刻度</option>
-                <option value="pointerBgColor">表针底部</option>
-                <option value="secPointerBgColor">秒针底部</option>
-                <option value="hourPointerColor">时针</option>
-                <option value="minPointerColor">分针</option>
-                <option value="secPointerColor">秒针</option>
-            </select>
-        </label>
-        <br />
-        <br />
-        <input class="jscolor" value="ffffff" id="color">
-        <br />
-        <br />
-        <button id="changeColor">更改颜色</button>
-    </div>
-
-    <script src="jquery.js"></script>
-    <script src="jscolor.js"></script>
-    <script src="clock.js"></script>
-    <script>
-        $(function () {
-            var H2MSEC = 60*60*1000;
-            var clockArr = {};
-
-            $('.box').each(function (i, e) {
-
-                var country = $(this).attr('data-country'),
-                    imgUrl = 'url(img/'+country+'.png)';
-                $(this).find('span').css({
-                    'background':imgUrl,
-                    'background-size':'contain'
-                });
-
-                var timediff = parseInt($(this).attr('data-timediff'))*H2MSEC,
-                    now = new Date().getTime(),
-                    thistime = now + timediff,
-                    clock = null;
-                if (country === 'China') {
-                    clock = $(this).find('div').initClock({
-                        outsideColor : 'rgba(232, 104, 104, 0.8)',
-                        insideColor : 'rgba(252, 58, 58, 0.6)',
-                        markSmallColor : '#FF9999',
-                        secPointerBgColor : '#E3D984',
-                        secPointerColor : '#E1E384'
-                    });
-                } else {
-                    clock = $(this).find('div').initClock();
-                }
-
-                clockArr[country] = clock;
-
-                clock.setTime(thistime);
-
-            });
-
-            $('#getBtn').on('click', function () {
-                var country = $('#country').val();
-                $('#showNowTime').text(clockArr[country].getTime(true));
-            });
-
-            $('#setBtn').on('click', function () {
-                var country = $('#country').val(),
-                    time = $('#time').val().split(':'),
-                    h = parseInt(time[0])%24,
-                    m = parseInt(time[1])%60,
-                    s = parseInt(time[2])%60,
-                    now = new Date(1970, 0, 1, h, m, s).getTime();
-
-                clockArr[country].setTime(now);
-            });
-
-            $('#restBtn').on('click', function () {
-                var country = $('#country').val(),
-                    msec = new Date().getTime();
-
-                clockArr[country].setTime(msec);
-            });
-
-            $('#changeColor').on('click', function () {
-                var country = $('#country').val(),
-                    color = '#'+$('#color').val(),
-                    colorName = $('#colorName').val();
-
-                clockArr[country].setColor(colorName, color);
-            });
-
-        });
-    </script>
-</body>
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+    
+  </body>
 </html>
-
