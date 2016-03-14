@@ -1,6 +1,7 @@
 # clock
 电子时钟的jQuery插件
 
+demo:http://newliuren.github.io/clock/index.html
 
 使用时需要提供一个外部的容器，在内部盒子中初始化时钟，盒子需设置宽高，
 时钟初始化时会自动计算并使用较小值作为时钟边长，不会冲破容器
