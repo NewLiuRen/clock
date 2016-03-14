@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+    <style>
+        select {
+            width: 200px;
+        }
+        .wrap {
+            float: left;
+            width: 900px;
+            margin: 50px auto;
+        }
+        .wrap span {
+            display: inline-block;
+            width: 64px;
+            height: 64px;
+        }
+        .wrap b {
+            display: inline-block;
+            margin-left: 10px;
+            line-height: 3;
+            vertical-align: top;
+        }
+        .box {
+            width: 150px;
+            float: left;
+            margin: 0 0 50px 100px;
+            overflow: hidden;
+            text-align: center;
+        }
+        .box div {
+            width: 150px;
+            height: 150px;
+        }
+        .ctrl {
+            float: left;
+            width: 260px;
+            margin-top: 100px;
+        }
+        #showNowTime {
+            width: 100%;
+            height: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrap">
+        <div class="box" data-country="China" data-timediff="0"><span></span><b>中国</b><div></div></div>
+        <div class="box" data-country="American" data-timediff="-12"><span></span><b>美国</b><div></div></div>
+        <div class="box" data-country="Canada" data-timediff="-13"><span></span><b>加拿大</b><div></div></div>
+        <div class="box" data-country="Brazil" data-timediff="-11"><span></span><b>巴西</b><div></div></div>
+        <div class="box" data-country="Argentina" data-timediff="-11"><span></span><b>阿根廷</b><div></div></div>
+        <div class="box" data-country="Germany" data-timediff="-7"><span></span><b>德国</b><div></div></div>
+        <div class="box" data-country="English" data-timediff="-8"><span></span><b>英国</b><div></div></div>
+        <div class="box" data-country="France" data-timediff="-7"><span></span><b>法国</b><div></div></div>
+        <div class="box" data-country="Japan" data-timediff="+1"><span></span><b>日本</b><div></div></div>
+    </div>
+    <div class="ctrl">
+        <h3>世界时间</h3>
+        <select name="country" id="country">
+            <option value="China">中国</option>
+            <option value="American">美国</option>
+            <option value="Canada">加拿大</option>
+            <option value="Brazil">巴西</option>
+            <option value="Argentina">阿根廷</option>
+            <option value="Germany">德国</option>
+            <option value="English">英国</option>
+            <option value="France">法国</option>
+            <option value="Japan">日本</option>
+        </select>
+        <br />
+        <br />
+        <button id="getBtn">获取当前时间</button>
+        <div id="showNowTime"></div>
+        <br />
+        <br />
+        <label>设置时间：
+            <input type="text" placeholder="格式为 hh:mm:ss" id="time" />
+        </label>
+        <br />
+        <br />
+        <button id="setBtn">设置当前时间</button>
+        <br />
+        <br />
+        <button id="restBtn">还原为当前时间</button>
+        <br />
+        <br />
+        <br />
+        <br />
+        <label>设置颜色：
+            <select name="colorName" id="colorName">
+                <option value="outsideColor">外框</option>
+                <option value="insideColor">内框</option>
+                <option value="fontColor">文字</option>
+                <option value="markSmallColor">小刻度</option>
+                <option value="markBigColor">大刻度</option>
+                <option value="pointerBgColor">表针底部</option>
+                <option value="secPointerBgColor">秒针底部</option>
+                <option value="hourPointerColor">时针</option>
+                <option value="minPointerColor">分针</option>
+                <option value="secPointerColor">秒针</option>
+            </select>
+        </label>
+        <br />
+        <br />
+        <input class="jscolor" value="ffffff" id="color">
+        <br />
+        <br />
+        <button id="changeColor">更改颜色</button>
+    </div>
+
+    <script src="jquery.js"></script>
+    <script src="jscolor.js"></script>
+    <script src="clock.js"></script>
+    <script>
+        $(function () {
+            var H2MSEC = 60*60*1000;
+            var clockArr = {};
+
+            $('.box').each(function (i, e) {
+
+                var country = $(this).attr('data-country'),
+                    imgUrl = 'url(img/'+country+'.png)';
+                $(this).find('span').css({
+                    'background':imgUrl,
+                    'background-size':'contain'
+                });
+
+                var timediff = parseInt($(this).attr('data-timediff'))*H2MSEC,
+                    now = new Date().getTime(),
+                    thistime = now + timediff,
+                    clock = null;
+                if (country === 'China') {
+                    clock = $(this).find('div').initClock({
+                        outsideColor : 'rgba(232, 104, 104, 0.8)',
+                        insideColor : 'rgba(252, 58, 58, 0.6)',
+                        markSmallColor : '#FF9999',
+                        secPointerBgColor : '#E3D984',
+                        secPointerColor : '#E1E384'
+                    });
+                } else {
+                    clock = $(this).find('div').initClock();
+                }
+
+                clockArr[country] = clock;
+
+                clock.setTime(thistime);
+
+            });
+
+            $('#getBtn').on('click', function () {
+                var country = $('#country').val();
+                $('#showNowTime').text(clockArr[country].getTime(true));
+            });
+
+            $('#setBtn').on('click', function () {
+                var country = $('#country').val(),
+                    time = $('#time').val().split(':'),
+                    h = parseInt(time[0])%24,
+                    m = parseInt(time[1])%60,
+                    s = parseInt(time[2])%60,
+                    now = new Date(1970, 0, 1, h, m, s).getTime();
+
+                clockArr[country].setTime(now);
+            });
+
+            $('#restBtn').on('click', function () {
+                var country = $('#country').val(),
+                    msec = new Date().getTime();
+
+                clockArr[country].setTime(msec);
+            });
+
+            $('#changeColor').on('click', function () {
+                var country = $('#country').val(),
+                    color = '#'+$('#color').val(),
+                    colorName = $('#colorName').val();
+
+                clockArr[country].setColor(colorName, color);
+            });
+
+        });
+    </script>
+</body>
+</html>
